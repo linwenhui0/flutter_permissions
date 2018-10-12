@@ -18,6 +18,9 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
+        maven{
+            url "http://108.160.143.119:8081/content/repositories/HLibrary-Releases"
+        }
     }
 }
 
@@ -40,5 +43,7 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation "com.hlibrary.util:utillibrary:0.0.1"
 }

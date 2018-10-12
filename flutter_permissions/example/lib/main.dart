@@ -12,33 +12,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      platformVersion = await FlutterPermissions.platformVersion;
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
-  }
+  StringBuffer textBuffer = new StringBuffer();
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +21,71 @@ class _MyAppState extends State<MyApp> {
         appBar: new AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: new Center(
-          child: new Text('Running on: $_platformVersion\n'),
+        body: new Column(
+          children: <Widget>[
+            new MaterialButton(
+              onPressed: () async {
+                await FlutterPermissions.openSettings();
+              },
+              child: new Text("打开设置"),
+            ),
+            new MaterialButton(
+              onPressed: () async {
+                PermissionStatus result =
+                    await FlutterPermissions.requestPermission(
+                        Permission.ReadContacts);
+                setState(() {
+                  textBuffer.write("申请读取通讯录权限结果$result\n");
+                });
+              },
+              child: new Text("申请读取通讯录权限"),
+            ),
+            new MaterialButton(
+              onPressed: () async {
+                PermissionStatus result =
+                    await FlutterPermissions.requestPermission(
+                        Permission.WriteContacts);
+                setState(() {
+                  textBuffer.write("申请写入通讯录权限结果$result\n");
+                });
+              },
+              child: new Text("申请写入通讯录权限"),
+            ),
+            new MaterialButton(
+              onPressed: () async {
+                PermissionStatus result =
+                    await FlutterPermissions.requestPermission(
+                        Permission.Camera);
+                setState(() {
+                  textBuffer.write("申请相机权限结果$result\n");
+                });
+              },
+              child: new Text("申请相机权限"),
+            ),
+            new MaterialButton(
+              onPressed: () async {
+                PermissionStatus result =
+                    await FlutterPermissions.requestPermission(
+                        Permission.AccessFineLocation);
+                setState(() {
+                  textBuffer.write("申请定位权限结果$result\n");
+                });
+              },
+              child: new Text("申请定位权限"),
+            ),
+            new MaterialButton(
+              onPressed: () async {
+                PermissionStatus result =
+                    await FlutterPermissions.requestPermission(
+                        Permission.RecordAudio);
+                setState(() {
+                  textBuffer.write("申请录音权限结果$result\n");
+                });
+              },
+              child: new Text("申请录音权限"),
+            ),
+            new Text(textBuffer.toString())
+          ],
         ),
       ),
     );
