@@ -55,11 +55,11 @@ class FlutterPermissionsPlugin : MethodCallHandler, PluginRegistry.RequestPermis
     }
 
     override fun onPermissionError(e: Exception) {
-        result?.success(3)
+        result?.success(2)
     }
 
     override fun onPermissionGranted(permission: String) {
-        result?.success(2)
+        result?.success(3)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray): Boolean {
