@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import com.hlibrary.util.Logger
-import com.hlibrary.util.PermissionGrant
 import com.hlibrary.util.PermissionManager
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -14,15 +13,16 @@ import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugin.common.PluginRegistry.Registrar
 
 
-class FlutterPermissionsPlugin : MethodCallHandler, PluginRegistry.RequestPermissionsResultListener, PermissionGrant {
+class FlutterPermissionsPlugin : MethodCallHandler, PluginRegistry.RequestPermissionsResultListener {
 
     private var registrar: Registrar? = null
-    private var result: Result? = null
     private var permissionManager: PermissionManager? = null
+    private var permissionGrant: PermissionGrant
 
     companion object {
         const val OPEN_SETTINGS = "openSettings"
         const val REQUEST_PERMISSION = "requestPermission"
+        const val REQUEST_PERMISSIONS = "requestPermissions"
         const val REQUEST_PERMISSION_CODE = 0x1001
         @JvmStatic
         fun registerWith(registrar: Registrar): Unit {
@@ -35,7 +35,9 @@ class FlutterPermissionsPlugin : MethodCallHandler, PluginRegistry.RequestPermis
 
     private constructor(registrar: Registrar) : super() {
         this.registrar = registrar
-        permissionManager = PermissionManager(registrar.activity(), this)
+        permissionGrant = PermissionGrant()
+        permissionManager = PermissionManager(registrar.activity(), permissionGrant)
+
     }
 
     override fun onMethodCall(call: MethodCall, result: Result): Unit {
@@ -45,21 +47,22 @@ class FlutterPermissionsPlugin : MethodCallHandler, PluginRegistry.RequestPermis
                 result.success(true)
             }
             REQUEST_PERMISSION -> {
-                this.result = result
+                permissionGrant.result = result
                 var permission: String? = call.argument("permission")
                 Logger.getInstance().defaultTagD("android.permission.$permission")
                 permissionManager?.requestPermission(REQUEST_PERMISSION_CODE, "android.permission.$permission")
             }
+            REQUEST_PERMISSIONS -> {
+                permissionGrant.result = result
+                val permissions: ArrayList<String>? = call.argument("permissions")
+                val permissionsLen = permissions?.size as Int
+                var permissionArrays = arrayOfNulls<String>(permissionsLen)
+                permissions.forEachIndexed { index, permission -> permissionArrays.set(index, permission) }
+                Logger.getInstance().defaultTagD(REQUEST_PERMISSIONS, permissionArrays)
+                permissionManager?.requestMultiPermissions(permissionArrays as Array<String>)
+            }
             else -> result.notImplemented()
         }
-    }
-
-    override fun onPermissionError(e: Exception) {
-        result?.success(2)
-    }
-
-    override fun onPermissionGranted(permission: String) {
-        result?.success(3)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray): Boolean {
@@ -75,4 +78,27 @@ class FlutterPermissionsPlugin : MethodCallHandler, PluginRegistry.RequestPermis
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         activity?.startActivity(intent)
     }
+
+    class PermissionGrant : com.hlibrary.util.PermissionGrant {
+
+
+        var result: Result? = null
+
+        override fun onPermissionError(e: Exception) {
+            this.result?.success(2)
+            this.result = null
+        }
+
+        override fun onPermissionGranted(permission: String) {
+            this.result?.success(3)
+            this.result = null
+        }
+
+        override fun onPermissionDenied(permissions: ArrayList<String>) {
+            this.result?.success(2)
+            this.result = null
+        }
+
+    }
+
 }

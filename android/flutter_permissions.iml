@@ -109,20 +109,32 @@
       <sourceFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/generated/res/rs/androidTest/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/generated/res/resValues/androidTest/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/generated/source/apt/test/debug" isTestSource="true" generated="true" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/annotations" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/attr" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/check-manifest" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/extractedTypedefs" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/incremental" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/intermediate-jars" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/javaPrecompile" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/jniLibs" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/library_and_local_jars_jni" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/lint" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/packaged-aidl" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/packaged-classes" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/packagedAssets" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/packaged_res" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/public_res" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/publish-proguard" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/symbols" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/intermediates/transforms" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/kotlin" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/outputs" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/flutter_permissions/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 27 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -133,6 +145,7 @@
     <orderEntry type="library" name="Gradle: android.arch.core:runtime-1.1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-compat-27.1.1" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:viewmodel-1.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.hlibrary.util:utillibrary-0.0.3.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.2.30@jar" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:livedata-core-1.1.0" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/linwenhui/flutter/bin/cache/artifacts/engine/android-arm/flutter.jar:unspecified@jar" level="project" />
@@ -140,7 +153,6 @@
     <orderEntry type="library" name="Gradle: com.android.support:support-core-ui-27.1.1" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.core:common:1.1.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-utils-27.1.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.hlibrary.util:utillibrary-0.0.2.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Gradle: com.alibaba:fastjson:1.2.44@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.30@jar" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:runtime-1.1.0" level="project" />

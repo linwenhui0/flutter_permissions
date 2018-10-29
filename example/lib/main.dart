@@ -84,6 +84,19 @@ class _MyAppState extends State<MyApp> {
               },
               child: new Text("申请录音权限"),
             ),
+            new MaterialButton(
+              onPressed: () async {
+                List<Permission> permissions = List<Permission>();
+                permissions.add(Permission.RecordAudio);
+                permissions.add(Permission.AccessFineLocation);
+                PermissionStatus result =
+                    await FlutterPermissions.requestPermissions(permissions);
+                setState(() {
+                  textBuffer.write("申请定位/录音权限结果$result\n");
+                });
+              },
+              child: new Text("申请定位/录音权限"),
+            ),
             new Text(textBuffer.toString())
           ],
         ),
