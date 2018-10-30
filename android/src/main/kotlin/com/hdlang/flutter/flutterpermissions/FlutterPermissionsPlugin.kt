@@ -52,15 +52,6 @@ class FlutterPermissionsPlugin : MethodCallHandler, PluginRegistry.RequestPermis
                 Logger.getInstance().defaultTagD("android.permission.$permission")
                 permissionManager?.requestPermission(REQUEST_PERMISSION_CODE, "android.permission.$permission")
             }
-            REQUEST_PERMISSIONS -> {
-                permissionGrant.result = result
-                val permissions: ArrayList<String>? = call.argument("permissions")
-                val permissionsLen = permissions?.size as Int
-                var permissionArrays = arrayOfNulls<String>(permissionsLen)
-                permissions.forEachIndexed { index, permission -> permissionArrays.set(index, permission) }
-                Logger.getInstance().defaultTagD(REQUEST_PERMISSIONS, permissionArrays)
-                permissionManager?.requestMultiPermissions(permissionArrays as Array<String>)
-            }
             else -> result.notImplemented()
         }
     }
