@@ -23,6 +23,21 @@ class FlutterPermissions {
             : PermissionStatus.notDetermined;
   }
 
+  static Future<PermissionStatus> requestPermissions(
+      List<Permission> permissions) async {
+    List<String> mPermissions = new List();
+    permissions.forEach(
+        (permission) => mPermissions.add(getPermissionString(permission)));
+
+    final status = await _channel
+        .invokeMethod("requestPermissions", {"permissions": mPermissions});
+    return status is int
+        ? intToPermissionStatus(status)
+        : status is bool
+            ? (status ? PermissionStatus.authorized : PermissionStatus.denied)
+            : PermissionStatus.notDetermined;
+  }
+
   /// Open app settings on Android and iOs
   static Future<bool> openSettings() async {
     final bool isOpen = await _channel.invokeMethod("openSettings");
@@ -53,8 +68,6 @@ class FlutterPermissions {
         return PermissionStatus.notDetermined;
     }
   }
-
-
 }
 
 /// Enum of all available [Permission]
@@ -199,5 +212,5 @@ String getPermissionString(Permission permission) {
       res = "VIBRATE";
       break;
   }
-  return res;
+  return  res;
 }

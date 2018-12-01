@@ -48,9 +48,17 @@ class FlutterPermissionsPlugin : MethodCallHandler, PluginRegistry.RequestPermis
             }
             REQUEST_PERMISSION -> {
                 permissionGrant.result = result
-                var permission: String? = call.argument("permission")
+                val permission: String? = call.argument("permission")
                 Logger.getInstance().defaultTagD("android.permission.$permission")
                 permissionManager?.requestPermission(REQUEST_PERMISSION_CODE, "android.permission.$permission")
+            }
+            REQUEST_PERMISSIONS -> {
+                permissionGrant.result = result
+                val permissions: List<String>? = call.argument("permissions")
+                val mPermissions: Array<String?> = arrayOfNulls(permissions!!.size)
+                permissions?.forEachIndexed { index, permission -> mPermissions[index] = "android.permission.$permission" }
+                Logger.getInstance().defaultTagD(mPermissions)
+                permissionManager?.requestMultiPermissions(mPermissions as Array<String>)
             }
             else -> result.notImplemented()
         }
@@ -61,7 +69,7 @@ class FlutterPermissionsPlugin : MethodCallHandler, PluginRegistry.RequestPermis
         return false
     }
 
-    fun openSettings() {
+    public fun openSettings() {
         val activity = registrar?.activity()
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                 Uri.parse("package:" + activity?.packageName))

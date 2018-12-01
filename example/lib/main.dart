@@ -84,6 +84,20 @@ class _MyAppState extends State<MyApp> {
               },
               child: new Text("申请录音权限"),
             ),
+            new MaterialButton(
+              onPressed: () async {
+                PermissionStatus result =
+                    await FlutterPermissions.requestPermissions([
+                  Permission.WriteExternalStorage,
+                  Permission.Camera,
+                  Permission.RecordAudio
+                ]);
+                setState(() {
+                  textBuffer.write("申请sd卡/相机/录音权限结果$result\n");
+                });
+              },
+              child: new Text("申请sd卡/相机/录音权限"),
+            ),
             new Text(textBuffer.toString())
           ],
         ),

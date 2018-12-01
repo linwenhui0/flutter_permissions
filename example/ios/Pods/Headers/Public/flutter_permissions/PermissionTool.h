@@ -1,0 +1,1 @@
+../../../../.symlinks/plugins/flutter_permissions/ios/Classes/PermissionTool.h

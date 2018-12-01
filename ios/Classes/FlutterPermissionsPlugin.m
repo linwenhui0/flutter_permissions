@@ -21,6 +21,8 @@
       NSDictionary* dic = call.arguments;
       NSString* permission = dic[@"permission"];
       [self requestPermission:permission withResult:result];
+  } else if([@"requestPermissions" isEqualToString:call.method]) {
+      result([[NSNumber alloc] initWithInteger:3]);
   } else {
     result(FlutterMethodNotImplemented);
   }
@@ -36,7 +38,7 @@
     } else if ([@"RECORD_AUDIO" isEqualToString:permission]) {
         [self recordAudioPermission:result];
     } else if([@"PHOTO_LIBRARY" isEqualToString:permission]) {
-        
+        result([[NSNumber alloc] initWithInteger:3]);
     } else {
         result(FlutterMethodNotImplemented);
     }
