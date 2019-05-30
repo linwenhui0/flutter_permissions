@@ -19,16 +19,16 @@ rootProject.allprojects {
         google()
         jcenter()
         maven {
-            url "http://108.160.143.119:8081/content/repositories/YFWL-Releases"
+            url "http://207.246.93.94:8081/nexus/content/repositories/YFWL-Releases"
         }
         maven {
-            url "http://108.160.143.119:8081/content/repositories/YFWL-Snapshots"
+            url "http://207.246.93.94:8081/nexus/content/repositories/YFWL-Snapshots"
         }
         maven {
-            url "http://108.160.143.119:8081/content/repositories/HLibrary-Releases"
+            url "http://207.246.93.94:8081/nexus/content/repositories/HLibrary-Releases"
         }
         maven {
-            url "http://108.160.143.119:8081/content/repositories/HLibrary-Snapshots"
+            url "http://207.246.93.94:8081/nexus/content/repositories/HLibrary-Snapshots"
         }
         maven{
             url 'http://maven.aliyun.com/nexus/content/groups/public/'

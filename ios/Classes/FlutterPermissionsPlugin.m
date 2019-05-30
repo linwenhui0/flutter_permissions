@@ -37,10 +37,8 @@
         [self requestLocationPermission:result];
     } else if ([@"RECORD_AUDIO" isEqualToString:permission]) {
         [self recordAudioPermission:result];
-    } else if([@"PHOTO_LIBRARY" isEqualToString:permission]) {
-        result([[NSNumber alloc] initWithInteger:3]);
     } else {
-        result(FlutterMethodNotImplemented);
+        result([[NSNumber alloc] initWithInteger:3]);
     }
 }
 
