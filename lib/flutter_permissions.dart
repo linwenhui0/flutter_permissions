@@ -3,14 +3,10 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class FlutterPermissions {
+  FlutterPermissions._();
+
   static const MethodChannel _channel =
       const MethodChannel('flutter_permissions');
-
-  static Future<bool> checkPermission(Permission permission) async {
-    final bool isGranted = await _channel.invokeMethod(
-        "checkPermission", {"permission": getPermissionString(permission)});
-    return isGranted;
-  }
 
   static Future<PermissionStatus> requestPermission(
       Permission permission) async {
