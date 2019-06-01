@@ -69,6 +69,10 @@ class FlutterPermissions {
 /// Enum of all available [Permission]
 enum Permission {
   // Android
+  // wifi
+  AccessWifiState,
+  // 网络
+  AccessNetworkState,
   // 日历
   ReadCalendar,
   WriteCalendar,
@@ -122,6 +126,12 @@ enum PermissionStatus {
 String getPermissionString(Permission permission) {
   String res;
   switch (permission) {
+    case Permission.AccessWifiState:
+      res = "ACCESS_WIFI_STATE";
+      break;
+    case Permission.AccessNetworkState:
+      res = "ACCESS_NETWORK_STATE";
+      break;
     case Permission.ReadCalendar:
       res = "READ_CALENDAR";
       break;
@@ -208,5 +218,5 @@ String getPermissionString(Permission permission) {
       res = "VIBRATE";
       break;
   }
-  return  res;
+  return res;
 }
