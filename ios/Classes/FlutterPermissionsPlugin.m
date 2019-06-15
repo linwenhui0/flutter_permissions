@@ -16,7 +16,7 @@
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
   if ([@"openSettings" isEqualToString:call.method]) {
       [PermissionTool openSettingPermission];
-      result(@"openSettings");
+      result([[NSNumber alloc] initWithBool:TRUE]);
   } else if([@"requestPermission" isEqualToString:call.method]){
       NSDictionary* dic = call.arguments;
       NSString* permission = dic[@"permission"];

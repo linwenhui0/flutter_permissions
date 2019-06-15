@@ -30,11 +30,9 @@ static PermissionTool *tools;
 + (void)returnMainThread:(void (^)(void))block {
     if (![NSThread isMainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"在分线程中返回");
             block();
         });
     } else {
-        NSLog(@"在主线程中");
         block();
     }
 }
@@ -102,7 +100,6 @@ static PermissionTool *tools;
                 }];            }
             *stop = TRUE;//不能省略
         } failureBlock:^(NSError *error) {
-            NSLog(@"获取权限失败:%@", error);
             [PermissionTool returnMainThread:^{
                 block(2);
             }];
@@ -288,7 +285,6 @@ static PermissionTool *tools;
             }];
         } break;
         case kCLAuthorizationStatusNotDetermined:
-            NSLog(@"用户正在授权");
             break;
         case kCLAuthorizationStatusRestricted: {
             [PermissionTool returnMainThread:^{
@@ -387,7 +383,6 @@ static PermissionTool *tools;
 + (void)entityPermission:(EKEntityType)entityType result:(void (^)(NSInteger authStatus))block {
     
     EKAuthorizationStatus status = [EKEventStore  authorizationStatusForEntityType:entityType];
-    NSLog(@"entityPermission %ld",(long)status);
     switch (status) {
         case EKAuthorizationStatusAuthorized: {
             [PermissionTool returnMainThread:^{
