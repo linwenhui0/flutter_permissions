@@ -4,6 +4,7 @@ flutter 权限申请
 
 ## IOS 配置
 在Info.plist当中增加以下权限
+
     <!-- 相册 -->
     <key>NSPhotoLibraryUsageDescription</key>
     <string>App需要您的同意,才能访问相册</string>
@@ -45,5 +46,11 @@ flutter 权限申请
     <!-- 联系人 -->
     <key>NSContactsUsageDescription</key>
     <string>App需要您的同意,才能访问联系人</string>
+
+
+## android 配置
+在build.gradle的repositories当中增加仓库地址
+
+	maven { url "http://207.246.93.94:8081/nexus/content/groups/public/" }
 
 

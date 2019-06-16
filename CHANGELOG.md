@@ -1,4 +1,9 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* 测试发布.
+
+
+## 0.0.2
+
+* 初始化版本.
 

@@ -19,16 +19,7 @@ rootProject.allprojects {
         google()
         jcenter()
         maven {
-            url "http://207.246.93.94:8081/nexus/content/repositories/YFWL-Releases"
-        }
-        maven {
-            url "http://207.246.93.94:8081/nexus/content/repositories/YFWL-Snapshots"
-        }
-        maven {
-            url "http://207.246.93.94:8081/nexus/content/repositories/HLibrary-Releases"
-        }
-        maven {
-            url "http://207.246.93.94:8081/nexus/content/repositories/HLibrary-Snapshots"
+            url "http://207.246.93.94:8081/nexus/content/groups/public/"
         }
         maven{
             url 'http://maven.aliyun.com/nexus/content/groups/public/'
@@ -60,5 +51,6 @@ android {
 dependencies {
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     compileOnly 'androidx.appcompat:appcompat:1.0.2'
-    compileOnly "com.hlibrary.util:utillibrary:0.0.10.8-SNAPSHOT"
+    implementation "com.hlibrary.util:utillibrary:0.0.10"
+    implementation 'com.alibaba:fastjson:1.2.51'
 }
