@@ -49,7 +49,7 @@ class FlutterPermissionsPlugin : MethodCallHandler, PluginRegistry.RequestPermis
             REQUEST_PERMISSION -> {
                 permissionGrant.result = result
                 val permission: String? = call.argument("permission")
-                Logger.getInstance().defaultTagD("android.permission.$permission")
+                Logger.instance.defaultTagD("android.permission.$permission")
                 permissionManager?.requestPermission(REQUEST_PERMISSION_CODE, "android.permission.$permission")
             }
             REQUEST_PERMISSIONS -> {
@@ -57,7 +57,7 @@ class FlutterPermissionsPlugin : MethodCallHandler, PluginRegistry.RequestPermis
                 val permissions: List<String>? = call.argument("permissions")
                 val mPermissions: Array<String?> = arrayOfNulls(permissions!!.size)
                 permissions?.forEachIndexed { index, permission -> mPermissions[index] = "android.permission.$permission" }
-                Logger.getInstance().defaultTagD(mPermissions)
+                Logger.instance.defaultTagD(mPermissions)
                 permissionManager?.requestMultiPermissions(mPermissions as Array<String>)
             }
             else -> result.notImplemented()
