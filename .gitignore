@@ -1,0 +1,5 @@
+.idea
+.packages
+example/android/.gradle
+example/build
+Generated.xcconfig
