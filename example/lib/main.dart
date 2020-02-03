@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_permissions/flutter_permissions.dart';
+import 'package:flutter_permissions/flutter_permissions_platform_interface.dart';
 
 void main() => runApp(new MyApp());
 
