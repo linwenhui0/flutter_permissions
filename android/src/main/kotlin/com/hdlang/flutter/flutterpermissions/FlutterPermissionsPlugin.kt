@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import com.hlibrary.util.Logger
+import com.hlibrary.util.PermissionGrant
 import com.hlibrary.util.PermissionManager
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -13,11 +14,10 @@ import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugin.common.PluginRegistry.Registrar
 
 
-class FlutterPermissionsPlugin : MethodCallHandler, PluginRegistry.RequestPermissionsResultListener {
+class FlutterPermissionsPlugin(private val registrar: Registrar) : MethodCallHandler, PluginRegistry.RequestPermissionsResultListener {
 
-    private var registrar: Registrar? = null
     private var permissionManager: PermissionManager? = null
-    private var permissionGrant: PermissionGrant
+    private var permissionGrant: PermissionGrantImp
 
     companion object {
         const val OPEN_SETTINGS = "openSettings"
@@ -27,17 +27,15 @@ class FlutterPermissionsPlugin : MethodCallHandler, PluginRegistry.RequestPermis
         @JvmStatic
         fun registerWith(registrar: Registrar): Unit {
             val channel = MethodChannel(registrar.messenger(), "flutter_permissions")
-            var flutterPermissionsPlugin = FlutterPermissionsPlugin(registrar)
+            val flutterPermissionsPlugin = FlutterPermissionsPlugin(registrar)
             channel.setMethodCallHandler(flutterPermissionsPlugin)
             registrar.addRequestPermissionsResultListener(flutterPermissionsPlugin)
         }
     }
 
-    private constructor(registrar: Registrar) : super() {
-        this.registrar = registrar
-        permissionGrant = PermissionGrant()
+    init {
+        permissionGrant = PermissionGrantImp()
         permissionManager = PermissionManager(registrar.activity(), permissionGrant)
-
     }
 
     override fun onMethodCall(call: MethodCall, result: Result): Unit {
@@ -69,7 +67,7 @@ class FlutterPermissionsPlugin : MethodCallHandler, PluginRegistry.RequestPermis
         return false
     }
 
-    public fun openSettings() {
+    private fun openSettings() {
         val activity = registrar?.activity()
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                 Uri.parse("package:" + activity?.packageName))
@@ -78,7 +76,7 @@ class FlutterPermissionsPlugin : MethodCallHandler, PluginRegistry.RequestPermis
         activity?.startActivity(intent)
     }
 
-    class PermissionGrant : com.hlibrary.util.PermissionGrant {
+    class PermissionGrantImp : PermissionGrant {
 
 
         var result: Result? = null

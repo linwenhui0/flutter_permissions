@@ -21,23 +21,26 @@ class FlutterPermissions {
 
   static Future<PermissionStatus> requestPermissions(
       List<Permission> permissions) async {
-    List<String> mPermissions = new List();
-    permissions.forEach(
-        (permission) => mPermissions.add(getPermissionString(permission)));
+    if (permissions?.isNotEmpty == true) {
+      List<String> mPermissions = [];
+      for (Permission permission in permissions) {
+        mPermissions.add(getPermissionString(permission));
+      }
 
-    final status = await _channel
-        .invokeMethod("requestPermissions", {"permissions": mPermissions});
-    return status is int
-        ? intToPermissionStatus(status)
-        : status is bool
-            ? (status ? PermissionStatus.authorized : PermissionStatus.denied)
-            : PermissionStatus.notDetermined;
+      final status = await _channel
+          .invokeMethod("requestPermissions", {"permissions": mPermissions});
+      return status is int
+          ? intToPermissionStatus(status)
+          : status is bool
+              ? (status ? PermissionStatus.authorized : PermissionStatus.denied)
+              : PermissionStatus.notDetermined;
+    }
+    return PermissionStatus.denied;
   }
 
   /// Open app settings on Android and iOs
   static Future<bool> openSettings() async {
     final bool isOpen = await _channel.invokeMethod("openSettings");
-
     return isOpen;
   }
 
