@@ -62,6 +62,6 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation "com.hlibrary.util:utillibrary:0.0.23"
+    implementation "com.github.linwenhui0:UtilLibary:0.0.26"
     implementation 'com.alibaba:fastjson:1.2.61'
 }

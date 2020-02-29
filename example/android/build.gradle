@@ -15,9 +15,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {
-            url "http://108.61.177.84:8081/nexus/content/groups/public/"
-        }
+        maven { url 'https://jitpack.io' }
     }
 }
 
